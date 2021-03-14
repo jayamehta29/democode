@@ -36,15 +36,21 @@ function sortFolder(folderPath){
     let content = fs.readdirSync(folderPath);
     for(let i=0;i<content.length;i++){
         //get extensions of each file
-        let extensionName = path.extname(content[i]);
-        console.log(extensionName);
-        let extensionFolderExist = checkFolder(extensionName);
-        if(extensionFolderExist){
-            moveFile(content[i]);
+        var stats = fs.lstatSync(`${folderPath}/${content[i]}`);
+        if(stats.isDirectory){
+            sortFolder(`${folderPath}/${content[i]}`);
         }else{
-            createFolder();
-            moveFile(content[i]);
+            let extensionName = path.extname(content[i]);
+            console.log(extensionName);
+            let extensionFolderExist = checkFolder(extensionName);
+            if(extensionFolderExist){
+                moveFile(content[i]);
+            }else{
+                createFolder();
+                moveFile(content[i]);
+            }
         }
+        
     }
 }
 sortFolder(folderPath);
