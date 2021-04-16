@@ -32,7 +32,7 @@ let tab;
     await tab.waitForSelector('.btn.btn-green.backbone.pull-right' , {visible:true});
     let createChallengeBtn = await tab.$('.btn.btn-green.backbone.pull-right');
     // console.log(createChallengeBtn);
-    let createChallengeLink = await tab.evaluate( function(elem){ return elem.getAttribute("href");  }  ,  createChallengeBtn);
+    let createChallengeLink = await tab.$("numbered-step-content");
     createChallengeLink = 'https://www.hackerrank.com'+createChallengeLink;
 
     for(let i=0 ; i<challenges.length ; i++){
