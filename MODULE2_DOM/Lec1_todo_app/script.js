@@ -7,7 +7,7 @@ function addTodo(){
     // "" , 0 , false , undefined
     if(todo){
         let listItem = document.createElement("li"); // it creates a element
-        listItem.classList.add("todo-item"); // it adds class to a element
+        listItem.classList.add("todo-item"); // it adds class to an element
         // <li class="todo-item"></li>;
 
         let pTag = document.createElement("p");
@@ -28,6 +28,7 @@ function addTodo(){
         todoInput.value = "";
     }
 }
+
 
 addTodoButton.addEventListener("click" , function(){
     addTodo()
