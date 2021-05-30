@@ -70,8 +70,8 @@ for (let i = 0; i < allCells.length; i++) {
   allCells[i].addEventListener("blur", function (e) {
     lastSelectedCell = e.target;
     let cellValue = e.target.textContent;
-    // let rowId = e.target.getAttribute("rowid");
-    // let colId = e.target.getAttribute("colid");
+    let rowId = e.target.getAttribute("rowid");
+    let colId = e.target.getAttribute("colid");
     let cellObject = db[rowId][colId];
     if (cellObject.value == cellValue) {
       return;
@@ -91,7 +91,7 @@ for (let i = 0; i < allCells.length; i++) {
     }
     cellObject.visited = true;
     visitedCells.push({ rowId: rowId, colId: colId });
-    console.log(sheetsDB);
+    // console.log(sheetsDB);
   });
 
   allCells[i].addEventListener("keydown", function (e) {
