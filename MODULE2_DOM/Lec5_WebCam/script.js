@@ -3,8 +3,10 @@ let recordButton = document.querySelector("#record-video");
 let photoButton = document.querySelector("#capture-photo");
 let zoomIn = document.querySelector("#in");
 let zoomOut = document.querySelector("#out");
+
+
 let recordingState = false;
-let constraints = { video: true };
+let constraints = { video: true  };
 let recordedData;
 let mediaRecorder;
 
@@ -67,23 +69,18 @@ let currZoom = 1;
   });
 })();
 
-
-
-
-
 function saveVideoToFs() {
   console.log("Saving Video");
   // file object in recordedData
-  let videoUrl = URL.createObjectURL(recordedData); // convert Blob object into Blob Url
-  // console.log(videoUrl);
-  let iv = setInterval(function(){
+  let blob = new Blob( [recordedData] , {type:"video/mp4"} );
+
+
+  let iv = setInterval( function(){
     if(db){
-      saveMedia("Video",videoUrl);
+      saveMedia("video" , blob);
       clearInterval(iv);
     }
-  },100);
-
-
+  }  , 100 );
   // let aTag = document.createElement("a");
   // aTag.download = "video.mp4";
   // aTag.href = videoUrl;
@@ -93,9 +90,7 @@ function saveVideoToFs() {
 }
 
 function capturePhotos() {
-  console.log("image clicked");
   photoButton.querySelector("div").classList.add("capture-animate");
-
   // async
   setTimeout(function(){
     photoButton.querySelector("div").classList.remove("capture-animate");
@@ -116,14 +111,15 @@ function capturePhotos() {
   ctx.drawImage(videoPlayer, 0, 0);
   let imageUrl = canvas.toDataURL("image/jpg"); //canvas object => file url String
 
-  let iv = setInterval(function(){
+  let iv = setInterval( function(){
     if(db){
-      saveMedia("Image",imageUrl);
+      saveMedia("image" , imageUrl);
       clearInterval(iv);
     }
+  }  , 100 );
+  
 
-  }, 100);
-
+  // skip the downloading part !!!
   // let aTag = document.createElement("a");
   // aTag.download = "photo.jpg";
   // aTag.href = imageUrl;
