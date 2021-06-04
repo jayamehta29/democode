@@ -42,6 +42,7 @@ todoInput.addEventListener("keypress" , function(e){
 
 function removeHandler() {
     deleteButton.addEventListener("click" , function(event){
+        console.log(event);
         event.target.parentNode.remove();
     }) 
   }
